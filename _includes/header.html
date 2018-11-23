@@ -6,7 +6,7 @@
     {%- assign page_paths = site.header_pages | default: default_paths -%}
     {%- assign titles_size = site.pages | map: 'title' | join: '' | size -%}
      <img id="logo" class="center" src="{{{site.github.url}}/assets/slikaJa_400x400.png" alt="stevan aleksic" height="150" width="150" align="middle">
-    
+    <a class="site-title" rel="author" href="{{ "/" | relative_url }}">{{ site.title1 | escape }}</a>
 
     {%- if titles_size > 0 -%}
       <nav class="site-nav">
