@@ -4,7 +4,7 @@
     {% assign default_paths = site.pages | map: "path" %}
     {% assign page_paths = site.header_pages | default: default_paths %}
 
-    <img id="logo" class="center" src="{{{site.github.url}}/assets/slikaJa_400x400.png" alt="stevan aleksic" height="200" width="200">
+    <img id="logo" class="center" src="{{{site.github.url}}/assets/slikaJa_400x400.png" alt="stevan aleksic" height="200" width="200" align="middle">
     <a class="site-title" rel="author" href="{{ "/" | relative_url }}">{{ site.title | escape }}</a>
 
     {% if page_paths %}
