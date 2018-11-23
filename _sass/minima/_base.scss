@@ -44,13 +44,12 @@ ul, ol, dl, figure,
  */
 img {
   max-width: 100%;
-  vertical-align: middle;
   border-radius: 50%;
   horizontal-align: middle;
-  display: block;
-    margin-left: auto;
-    margin-right: auto;
-    width: 50%;
+}
+img.center {
+    display: block;
+    margin: 0 auto;
 }
 
 
