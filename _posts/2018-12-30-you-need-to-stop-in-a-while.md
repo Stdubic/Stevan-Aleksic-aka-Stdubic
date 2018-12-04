@@ -21,3 +21,5 @@ A thoughtful pause can help us catch a fleeting thought, determine the utility o
 Sometimes the most practical, healthy thing we can do for ourselves is to free up time throughout our day for quick hits of nothing at all.
 
 
+
+
