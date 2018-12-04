@@ -1,7 +1,4 @@
 
----
-layout: post
----
 After learning anything, being exposed to new information, encountering art or any other type of cultural artifact, take a moment to yourself and quietly process what you’ve just intellectually imbibed.
 
 This heuristic—to pause and think after taking something in—serves multiple purposes.
