@@ -405,7 +405,7 @@ public function proxy($grantType, array $data = [])
 ```
 
 
-##Testing that things work
+## Testing that things work
 
 Now we are ready to test that things are working. First you will need to add a user. Somewhere add this code and run it.
 
