@@ -134,8 +134,11 @@ Put the routes in infrastructure/Auth/routes_public.php.
 
 $router->post('/login', 'LoginController@login');
 $router->post('/login/refresh', 'LoginController@refresh');
+
+```
 Put this route in infrastructure/Auth/routes_protected.php.
 
+```php
 <?php
 
 $router->post('/logout', 'LoginController@logout');
