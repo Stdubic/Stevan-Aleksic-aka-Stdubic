@@ -2,7 +2,9 @@
 layout: post
 ---
 
-## Implementing OAuth authorization using Laravel Passport (h2)
+## Implementing OAuth authorization using Laravel Passport 
+
+
 Okay, so now have all the concepts in order. Now let us get to the code. We want to create a login screen for our SPA so the user can authenticate themselves. Let us just quickly recap the flow.
 
 We create a client in our OAuth server that represents our app
@@ -26,32 +28,42 @@ Now when users click the link the attacker will gain their refresh token. That m
 
 Enough theory! Let us get on with the code.
 
-## (h2)Dependencies we are going to use
+## Dependencies we are going to use
 Since we are making a Laravel API it makes sense to use Laravel Passport. Laravel's OAuth implementation. It is important to know that Laravel Passport is pretty much just an Laravel integration into The PHP League's OAuth 2 package. Therefore, to learn the concepts on a more granular level I refer to that package instead of Laravel Passport.
 
 PHP League's OAuth package issues JSON Web Token's (JWT). This is simply a way to structure tokens that includes some relevant meta data. For instance the token could include meta data as to whether or not this user is an admin.
 
-## (h2)Installation
+## Installation
 For more detailed instructions you can always refer to Laravel Passport's documentation.
 
 First install Passport using composer.
 
+```html
 composer require laravel/passport
+```
 And add the service provider to config/app.php.
-
+```html
 Laravel\Passport\PassportServiceProvider::class,
+```
 And migrate the tables.
 
+```html
 php artisan migrate
+```
 When the authorization server returns tokens these are actually encrypted on the server using a 1024-bit RSA keys. Both the private and the public key will live in your storage/ out of sight. To generate the RSA keys run this command. The command will also create our password client.
 
+```html
 php artisan passport:install
+```
 Remember to save your client secrets somewhere. I usually save them in my .env file.
 
+```html
 PERSONAL_CLIENT_ID=1
 PERSONAL_CLIENT_SECRET=mR7k7ITv4f7DJqkwtfEOythkUAsy4GJ622hPkxe6
 PASSWORD_CLIENT_ID=2
 PASSWORD_CLIENT_SECRET=FJWQRS3PQj6atM6fz5f6AtDboo59toGplcuUYrKL
+```
+
 The personal grant type is a special type of grant that issues tokens that do not expire. For instance when you issue access tokens from your GitHub account to be used in for instance Composer that is a personal grant access token. One that composer can use for perpetuity to request GitHub on your behalf.
 
 Please refer to Laravel Passport's documentation for the following steps as they might change in the future.
@@ -84,7 +96,7 @@ return [
 ];
 
 ```
-## (h2)Configure Passport to issue short-lived tokens
+## Configure Passport to issue short-lived tokens
 Now Passport is pretty much installed. However, there is one important step. Remember how access tokens should be short-lived? Passport by default issues long-lived tokens (no, I do not know why). So we need to configure that. In the place where you ran Passport::routes(); (AuthServiceProvider or similar) put in the following configuration.
 
 ```html
@@ -121,7 +133,7 @@ Start by creating three new routes: POST /login, POST /login/refresh and POST /l
 
 Put the routes in infrastructure/Auth/routes_public.php.
 
-```html
+```php
 <?php
 
 $router->post('/login', 'LoginController@login');
