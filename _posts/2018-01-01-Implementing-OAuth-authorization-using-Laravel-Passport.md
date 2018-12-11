@@ -72,9 +72,7 @@ You will need to add the Laravel\Passport\HasApiTokens trait to your user model.
 
 Next you need to run Passport::routes(); somewhere, preferably in a your AuthServiceProvider. Finally in config/auth.php set the driver property of the api authentication guard to passport. If your user model is NOT App\Users then you need to change the config in config/auth.php under providers.users.model.
 
-If you have been following the article series or just use Larapi you should make sure the api guard is set in config/optimus.components.php under protection_middleware.
-
-```html
+```php
 <?php
 
 return [
@@ -343,7 +341,7 @@ class LoginProxy
     }
 }
 
-```html
+```
 
 
 Quite the mouthful, I know. But the important code lives in proxy(). Let us take a closer look.
