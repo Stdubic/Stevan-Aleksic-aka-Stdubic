@@ -2,7 +2,7 @@
 layout: post
 ---
 
-Implementing OAuth authorization using Laravel Passport
+## Implementing OAuth authorization using Laravel Passport (h2)
 Okay, so now have all the concepts in order. Now let us get to the code. We want to create a login screen for our SPA so the user can authenticate themselves. Let us just quickly recap the flow.
 
 We create a client in our OAuth server that represents our app
@@ -26,12 +26,12 @@ Now when users click the link the attacker will gain their refresh token. That m
 
 Enough theory! Let us get on with the code.
 
-Dependencies we are going to use
+## (h2)Dependencies we are going to use
 Since we are making a Laravel API it makes sense to use Laravel Passport. Laravel's OAuth implementation. It is important to know that Laravel Passport is pretty much just an Laravel integration into The PHP League's OAuth 2 package. Therefore, to learn the concepts on a more granular level I refer to that package instead of Laravel Passport.
 
 PHP League's OAuth package issues JSON Web Token's (JWT). This is simply a way to structure tokens that includes some relevant meta data. For instance the token could include meta data as to whether or not this user is an admin.
 
-Installation
+## (h2)Installation
 For more detailed instructions you can always refer to Laravel Passport's documentation.
 
 First install Passport using composer.
@@ -62,6 +62,7 @@ Next you need to run Passport::routes(); somewhere, preferably in a your AuthSer
 
 If you have been following the article series or just use Larapi you should make sure the api guard is set in config/optimus.components.php under protection_middleware.
 
+```html
 <?php
 
 return [
@@ -81,9 +82,12 @@ return [
 
     'view_folder_name' => 'views'
 ];
-Configure Passport to issue short-lived tokens
+
+```
+## (h2)Configure Passport to issue short-lived tokens
 Now Passport is pretty much installed. However, there is one important step. Remember how access tokens should be short-lived? Passport by default issues long-lived tokens (no, I do not know why). So we need to configure that. In the place where you ran Passport::routes(); (AuthServiceProvider or similar) put in the following configuration.
 
+```html
 Passport::routes(function ($router) {
     $router->forAccessTokens();
     $router->forPersonalAccessTokens();
@@ -93,6 +97,10 @@ Passport::routes(function ($router) {
 Passport::tokensExpireIn(Carbon::now()->addMinutes(10));
 
 Passport::refreshTokensExpireIn(Carbon::now()->addDays(10));
+
+```
+
+
 Also notice we replaced Passport::routes(); with a more granular configuration. This way we only create the routes that we need. forAccessTokens(); enable us to create access tokens. forPersonalAccessTokens(); enable us to create personal tokens although we will not use this in this article. Lastly, forTransientTokens(); creates the route for refreshing tokens.
 
 This is my configuration. So an access token expires after 10 minutes and an refresh token expires after 10 days. However, in reality your user will probably not be logged out every 10 days since every refresh will generate a new refresh token as well (which again will have 10 days expiration).
@@ -100,8 +108,10 @@ This is my configuration. So an access token expires after 10 minutes and an ref
 What did we install?
 If you run php artisan route:list you can see the new endpoints installed by Laravel Passport. I have extracted the ones we are going to focus on below.
 
+```html
 | POST | oauth/token         | \Laravel\Passport\Http\Controllers\AccessTokenController@issueToken
 | POST | oauth/token/refresh | \Laravel\Passport\Http\Controllers\TransientTokenController@refresh
+```
 These are the two routes that our proxy is going to request to generate access tokens. Notice, even though these two are publicly available they require the client ID and the client secret which is only known by our API. So it would be near impossible to request tokens outside of our flow.
 
 Creating the login proxy
@@ -111,6 +121,7 @@ Start by creating three new routes: POST /login, POST /login/refresh and POST /l
 
 Put the routes in infrastructure/Auth/routes_public.php.
 
+```html
 <?php
 
 $router->post('/login', 'LoginController@login');
@@ -160,8 +171,12 @@ class LoginController extends Controller
         return $this->response(null, 204);
     }
 }
+```
+
 I also made a LoginRequest class and put it in infrastructure/Auth/Requests/LoginRequest.php.
 
+
+```html
 <?php
 
 namespace Infrastructure\Auth\Requests;
@@ -183,8 +198,12 @@ class LoginRequest extends ApiRequest
         ];
     }
 }
+
+```
 Now we have the structure setup to create access tokens for our users. All of this should seem pretty familiar to you. So let us move right along to the proxy class. Put this code in infrastructure/Auth/LoginProxy.php.
 
+
+```html
 <?php
 
 namespace Infrastructure\Auth;
@@ -311,8 +330,13 @@ class LoginProxy
         $this->cookie->queue($this->cookie->forget(self::REFRESH_TOKEN));
     }
 }
+
+```html
+
+
 Quite the mouthful, I know. But the important code lives in proxy(). Let us take a closer look.
 
+```html
 public function proxy($grantType, array $data = [])
 {
     /*
@@ -367,36 +391,41 @@ public function proxy($grantType, array $data = [])
         'expires_in' => $data->expires_in
     ];
 }
-Internal API consumption with Optimus\ApiConsumer
-One concept that is probably new for you here is that of $this->apiConsumer. This is one of my small libraries that you can use for making "internal" requests. The way it works is that it will use the Laravel router and "fake" that a request was made by the client. We can use this to call one of our own routes. Of course if your authorization server lives on another server, or if you prefer to make the request over the internet then you can replace this with an alternative mechanism such as Guzzle. You can check out one of my older articles for a Guzzle example.
 
-The API consumer library is called Optimus\ApiConsumer and you can easily add it to Laravel through composer. You can also check out the source code here.
+```
 
-composer require optimus/api-consumer 0.2.*
-You will also need to add a service provider to config/app.php.
 
-Optimus\ApiConsumer\Provider\LaravelServiceProvider::class,
-Testing that things work
+##(h2)Testing that things work
+
 Now we are ready to test that things are working. First you will need to add a user. Somewhere add this code and run it.
 
+```html
 DB::table('users')->insert([
   'name' => 'Esben',
   'email' => 'esben@esben.dk',
   'password' => password_hash('1234', PASSWORD_BCRYPT)
 ]);
+```
 This should add a user for us to use for testing. Just remember to remove it again. There are a lot of ways for us to test. I prefer to do it quickly from the command line using cURL. Run the command below. Remember to switch the url to your own.
 
+```html
 curl -X POST http://larapi.dev/login -b cookies.txt -c cookies.txt -D headers.txt -H 'Content-Type: application/json' -d '
     {
         "email": "esben@esben.dk",
         "password": "1234"
     }
 '
+```
 If you get a response like the one below everything is working properly. If not, try to backtrack and see if you missed a step.
 
+
+```html
 {"access_token":"eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6Ijc5Y2M4NDVjMGQ3YjZkYjcxMThjNjI3NDRhZTM0MzFkYzc3NTNkODEyNTFjNzFkM2M0MjgwMmVkMmE1ZmVmNDI1ZDk2ODUzOTNlZWIzNDE1In0.eyJhdWQiOiIyIiwianRpIjoiNzljYzg0NWMwZDdiNmRiNzExOGM2Mjc0NGFlMzQzMWRjNzc1M2Q4MTI1MWM3MWQzYzQyODAyZWQyYTVmZWY0MjVkOTY4NTM5M2VlYjM0MTUiLCJpYXQiOjE0ODk5MTQ4MjIsIm5iZiI6MTQ4OTkxNDgyMiwiZXhwIjoxNDg5OTE1NDIyLCJzdWIiOiIyIiwic2NvcGVzIjpbXX0.Se3rO03T9w93m31gSCy8O-FnCZP6FCoIUhU9AyY-Nl3ZZHciuPEP0NikPhrssIOa4-gLRk53j53S_j6Twv_PY_sRosCe2kDA0Qdao5zePV79M_sEvb9VOcbcRHSJMU0GcNo0Cs7B8gf8YDlArj5qKIkoOctO1r9SWcpoEqBl1nHPmueTCUotu3CWWB-LXPNTIMZk13B9misb3oq0n4PUqivAT73aSWLgVH_eJbvG8zxdumpZME_TgX_36YemDm3l_31PMczH9QRkRf86ShP2Ji6gbVZrFnbI5UFOXWEVDGSfl6FVa5NqDi9iqpKNc4WCossy9DlAGGYtKFsbNpMxULZWv7NevblnQ5j0SpbEo_ISSKzfrWELNNSj06KeG7Et8SudIhyTaLv4GIDBA5U-LQY-Z4XutlxVrlkmb2OmClp1SmTaMGK0Fqge3DuxnfurBH3rLrVeOa9OIYz_VUXu9SQhKdLEZyPX3uNO7Yuh5DhLrQ8INrwcYxN1dtg9GNpWqM9h4DJNZ3mPaoEgAGTzzCmXXJL1KF7_h5F2EVl2h0dbzQMZjdacjVvkL-oWLwEXjykpqano6xHUDaYp9Q7RID7ehNcUUwhir8035DnxBr8O3-TVT4QHVWJA-GMVXhpLdHrah2gbhEDfgSoGKuAQQW9KkqTsaC4DvIeYuuKGOB8","expires_in":600}
+
+```
 If you open headers.txt you can also see the refresh token being set as a HttpOnly cookie.
 
+```html
 HTTP/1.1 200 OK
 Server: nginx
 Content-Type: application/json; charset=utf-8
@@ -408,12 +437,18 @@ Cache-Control: no-cache, private
 Date: Sun, 19 Mar 2017 09:13:42 GMT
 Set-Cookie: refreshToken=eyJpdiI6InQyam9vSXRMenIxMFFWWVVDTUhlbFE9PSIsInZhbHVlIjoiTFF5ZkNlaWNJRmsxSEg4T01XZVN5Q3N3a3hmOTFpU012aFE3N2E4WTd0RXFJMjJNNzVLRTFPUWpKdk52THkyQzc0VFwvcnczaG5lcXR6ZW1BR05TcGMwWFZZZldoNzhHczJtRHhzSjhkVFVqVkQyWEVqUWpNeTdnd3plVDA3TW4wYituTHZHdW5jV01CWWJkZHA5b3V3TmJrZXZpaUhLcmhkTGdqb2lcLzZTb201bzJOaU1DTTdjbkxvZzRWK3lEOXpyMThmVGRPSmZFc09Jc2x1cGV1RmIrVEdSa1RFb1BhSmtTMTRtMXVGMzdkTkRsXC9oOW45TWZNaVB0aHZ3ZTNVUmN0UHpqaVdSS0hHTUhkYk1vOFZvY2IrUHlvb202cHkxekd2N0UxNnlqeVNDV2pGdjc5eEV5WEFzTGxJNHZlSDk2UFhmdTNoTUs2OGtqSk1UZjE1WTBrUzIxazRFSEtTMnB3Y1ZUdGxqRjZ0bDQ5RUIwMFwvM2h4SG0xbk9OZlQwNFFzUnpURTlrSGxXVGhOaUp4amxyN0cxcGVXdlhrNUhXMldjSnNMZ3hVS0ZUV1A3V1Y5K0pOYnJ5VTVQM2p1clF1T052WFl2Yko4YnJUMmdZV1wvb1pUVnVsMUVwOXpFSWRPS0crTmEwa3MrQXlGYUptYnl0K01WbHZxcGFLUW1NemdMbk54Mjg0dkRFMldNTjF0bGVVNmE0MVlYNXk3V3N3dU8rRmVCN0cxNkYzSWJ0UkNpbWZlTTh1R1RJQTc5SnNKcWNrY0tcL2dmTmNiTFJnTjM3WTJpdzhUdGRmb3R2XC9qYlwvVURyWVFiXC9SN2VKOVNLMGVYWStsdTlHaGkxc01ndmlwM1lnYVBjK2wzMERadVdDRGw3Tjk1c0EzNHlZYXhxVlYzZ3N0SUlKUG5aSHB5SjZlREJIamhQb2loeUduNTBlWkJ0SFgzYitTNHpwbTZMNHVwMnZZUnN1K3JtZlpGM0ZrRjc0TVRHR2dxTFNXVnRTbHJhK2Vyc2NxOEorZDloa3dcL1VcL2F1c1lFVXRudW81Uk1vM0tTcU1BVE5LRE5xeHBrNmR3WTRUSFV2MnFncWZ3WHNwdko5NmRZRnU1XC9RemxzTkVsUmZicXB1SThqbE41TFdtMVQyNE1EY0FWN0g4N0grNGExeWlHZGlYZ2hEXC9WUkh2cFVucTFIT1JcL3hsYXR3eWU3UGJFZGprT24yZ29RbG5hSnUxXC81OXZmdFdwZnIzUEFHXC9qcXdTRT0iLCJtYWMiOiI3MTc3MzVhYjg2MDAyY2MwMDQ1MmUxOWQ2OTcxYzFjYWI3ZDMwZjNkZDMwM2UyY2NhZjE0MzA3MDBmYzdiZWZhIn0%3D; expires=Fri, 09-Nov-2018 09:13:42 GMT; Max-Age=51840000; path=/; HttpOnly
 X-UA-Compatible: IE=Edge
+
+```
 Because we use the -c and -b flags we will save and use cookies between requests, just like a browser. So we can actually try to refresh our token using the refresh token by running the command below.
 
+```html
 curl -X POST http://larapi.dev/login/refresh -b cookies.txt -c cookies.txt
+```
 If you get a new access token that means this worked as well. Lastly, we can try to run logout.
 
+```html
 curl -X POST http://larapi.dev/logout -b cookies.txt -c cookies.txt
+```
 Now, if you run the refresh command you should get a 401 Unauthorized response.
 
 Scoping user requests to entities belonging to requesting user
@@ -421,11 +456,15 @@ So now that we got it all working, how do we using it? Well if you added the aut
 
 Imagine you were making the next billion dollar start-up. Let us say you were making the next Slack competitor. Whenever a user logs into a chat room it should display all the channels belonging to that chatroom. So imagine the following relationship.
 
+```html
 Chat Room 1 -------> n Users
 Chat Room 1 -------> n Channels
+```
 Channels belonging to a chat room
 
 To fill out the left navigation we have to request all the channels belonging to the Traede team when the user logs in. Imagine we have the endpoint GET /channels and that will just get all the channels appropriate for the user. Now the code below is an arbitrary, made-up example but it should demonstrate how one might go about scoping requests based on the current user.
+
+```html
 
 <?php
 
@@ -455,9 +494,11 @@ class ChatRoomService
         return $channels;
     }
 }
+
+```
 Now we can have multiple chatrooms on the same API, using the same database. Every user will get a different response to GET /channels. This was just a small example of how you use the user context to scope your API requests.
 
-Conclusion
+## (h2)Conclusion
 This last example will also conclude this article on how to implement authentication for your API. By using Laravel Passport we easily install a robust authentication solution for our API. Using a proxy and HttpOnly cookies we increase the security of our solution.
 
 Do not forget to further study the principles of OAuth for the best possible setup. Especially remember that the OAuth 2 spec assumes by default that there is a secure connection between the server and the client!
