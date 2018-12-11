@@ -2,8 +2,6 @@
 layout: post
 ---
 
-## Implementing OAuth authorization using Laravel Passport 
-
 
 Okay, so now have all the concepts in order. Now let us get to the code. We want to create a login screen for our SPA so the user can authenticate themselves. Let us just quickly recap the flow.
 
