@@ -97,7 +97,7 @@ return [
 ## Configure Passport to issue short-lived tokens
 Now Passport is pretty much installed. However, there is one important step. Remember how access tokens should be short-lived? Passport by default issues long-lived tokens (no, I do not know why). So we need to configure that. In the place where you ran Passport::routes(); (AuthServiceProvider or similar) put in the following configuration.
 
-```html
+```php
 Passport::routes(function ($router) {
     $router->forAccessTokens();
     $router->forPersonalAccessTokens();
@@ -186,7 +186,7 @@ class LoginController extends Controller
 I also made a LoginRequest class and put it in infrastructure/Auth/Requests/LoginRequest.php.
 
 
-```html
+```php
 <?php
 
 namespace Infrastructure\Auth\Requests;
@@ -213,7 +213,7 @@ class LoginRequest extends ApiRequest
 Now we have the structure setup to create access tokens for our users. All of this should seem pretty familiar to you. So let us move right along to the proxy class. Put this code in infrastructure/Auth/LoginProxy.php.
 
 
-```html
+```php
 <?php
 
 namespace Infrastructure\Auth;
@@ -346,7 +346,7 @@ class LoginProxy
 
 Quite the mouthful, I know. But the important code lives in proxy(). Let us take a closer look.
 
-```html
+```php
 public function proxy($grantType, array $data = [])
 {
     /*
@@ -405,11 +405,11 @@ public function proxy($grantType, array $data = [])
 ```
 
 
-##(h2)Testing that things work
+##Testing that things work
 
 Now we are ready to test that things are working. First you will need to add a user. Somewhere add this code and run it.
 
-```html
+```php
 DB::table('users')->insert([
   'name' => 'Esben',
   'email' => 'esben@esben.dk',
@@ -474,7 +474,7 @@ Channels belonging to a chat room
 
 To fill out the left navigation we have to request all the channels belonging to the Traede team when the user logs in. Imagine we have the endpoint GET /channels and that will just get all the channels appropriate for the user. Now the code below is an arbitrary, made-up example but it should demonstrate how one might go about scoping requests based on the current user.
 
-```html
+```php
 
 <?php
 
@@ -508,7 +508,7 @@ class ChatRoomService
 ```
 Now we can have multiple chatrooms on the same API, using the same database. Every user will get a different response to GET /channels. This was just a small example of how you use the user context to scope your API requests.
 
-## (h2)Conclusion
+## Conclusion
 This last example will also conclude this article on how to implement authentication for your API. By using Laravel Passport we easily install a robust authentication solution for our API. Using a proxy and HttpOnly cookies we increase the security of our solution.
 
 Do not forget to further study the principles of OAuth for the best possible setup. Especially remember that the OAuth 2 spec assumes by default that there is a secure connection between the server and the client!
