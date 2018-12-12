@@ -1,8 +1,5 @@
 ---
 layout: post
-title: "Shorthand comparisons in PHP"
-
-meta: "phor"
 ---
 
 
