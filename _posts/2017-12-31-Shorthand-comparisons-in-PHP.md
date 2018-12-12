@@ -98,7 +98,9 @@ null ?? 'fallback'; // 'fallback'
 ```
 The first example could also be written using a ternary operator:
 
+```php
 $output = isset($input['key']) ? $input['key'] : 'fallback';
+```
 Note that it's impossible to use the shorthand ternary operator when checking the existance of array keys. It will either trigger an error or return a boolean, instead of the real lefthand operand's value.
 
 ```php
