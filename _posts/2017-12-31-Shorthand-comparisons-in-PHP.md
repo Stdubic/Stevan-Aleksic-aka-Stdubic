@@ -2,7 +2,7 @@
 layout: post
 title: "Shorthand comparisons in PHP"
 categories: junk
-author: "Aure Moser"
+author: "Stevan Aleksic"
 meta: "phor"
 ---
 
