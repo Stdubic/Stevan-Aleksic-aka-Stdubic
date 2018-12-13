@@ -31,7 +31,9 @@ The ternary operator will use its lefthand operand when the condition evaluates 
 Shorthand ternary operator
 Since PHP 5.3, it's possible to leave out the lefthand operand, allowing for even shorter expressions:
 
+```php
 $result = $initial ?: 'default';
+```
 In this case, the value of $result will be the value of $initial, unless $initial evaluates to false, in which case the string 'default' is used.
 
 You could write this expression the same way using the normal ternary operator:
