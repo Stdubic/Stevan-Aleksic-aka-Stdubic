@@ -5,7 +5,7 @@ layout: post
 
 
 
-zen-rock-gardenLess is often better. In mathematics, physics, and arts, simplifying and shedding every bit of complexity and redundancy have produced remarkable results. It leads to abstraction, elevates expressiveness, and reveals patterns that are otherwise buried in details.
+Less is often better. In mathematics, physics, and arts, simplifying and shedding every bit of complexity and redundancy have produced remarkable results. It leads to abstraction, elevates expressiveness, and reveals patterns that are otherwise buried in details.
 
 Programming is no different. For a developer that looks for correctness (does my program behave as expected?), efficiency (does my program use CPU and memory resources appropriately?), and robustness (can I reuse my program or extend it easily for future applications?), minimalism is a sure guideline. The beauty of simplicity translates into better programming.
 
