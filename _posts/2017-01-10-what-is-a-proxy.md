@@ -32,7 +32,7 @@ There are also a few negative sides of using a proxy which include:
 Slower internet connection. Since you are connecting to an additional server you may notice a decrease in speed.
 Blocked sites. Some sites will not allow proxy connections so you may be blocked from a few websites.
 
-##Reverse Proxy Server
+## Reverse Proxy Server
 
 There are also many cases when you might need to setup a proxy server to solve a programming problem. For example you may be able to proxy an NGINX route to another server or another application. In this case the server is essentially acting as another server, and this is referred to as a Reverse Proxy Server.
 
