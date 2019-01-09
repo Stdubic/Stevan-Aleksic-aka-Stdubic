@@ -19,12 +19,13 @@ I want to share some of that with you here.
 
 It’s valuable information, and it applies to everyone. Software development often scores well in terms of job satisfaction, but developers are are, despite their protestations to the contrary, humans and are subject to the same limitations as anyone else.
 
-How stress works
+## How stress works
 Programming culture emphasises excellence and ability. This can make it difficult to admit to ourselves or others that we might be having an issue with stress.
 
 However, it’s literally baked into our neural and physical circuitry, so everybody has to deal with it at some point.
 
-Stress in the mind and body
+### Stress in the mind and body
+
 Stress is a series of physiological and mental changes that happen when our body and mind perceive a threat or challenge in our environment.
 
 Stress and relaxation are defined by the level of physiological arousal and muscular tension in the body.
@@ -56,7 +57,8 @@ Or our digestion shuts down so that the energy it uses might be redirected to ma
 
 The same thing happens with our immune response. Energy is conserved by shutting it down temporarily, at the expense of reduced immunity. This is why you often get sick at times of increased stress, and why excessive stress is associated with long-term, chronic illnesses.
 
-Stress and the nervous system
+## Stress and the nervous system
+
 Stress is a pretty low-level response in humans. It’s mediated by the sympathetic branch of the autonomic nervous system. Think of this as some pretty deeply embedded hardware - we're talking at the level of BIOS here in computing terms.
 
 The autonomic nervous system is responsible for a whole heap of automatic behaviour in humans—stuff you don’t have to think about, you just do.
@@ -70,7 +72,8 @@ An interesting thing about the stress response is that it doesn’t require the 
 
 The threat response can be activated whenever a challenge or threat is perceived. This is why an email or conversation with your boss can be stressful, even though you are not in immediate physical danger.
 
-Good and bad stress
+## Good and bad stress
+
 A little bit of everything is good, in moderation. Red wine, project management processes, and even stress.
 
 Stress is actually a pretty useful response in a challenging or threatening situation. One of the many reasons that we’ve thrived as a species is our ability to evade threats and rise to challenges.
@@ -104,7 +107,8 @@ It turns out that continuously flooding your system with stress hormones, dimini
 
 It's this type of stress I'll talk about for the rest of the article, because it's the most common.
 
-Programmers and stress
+## Programmers and stress
+
 All careers have their sources of stress. Sometimes stress is caused by a particular job situation—for example, poor management or team relations.
 
 Sometimes, there are inherent sources of stress caused by the nature of the career itself.
@@ -125,7 +129,8 @@ Because we’re all amazing super-human code machines (hint: we’re not!), ther
 
 Intrinsic sources of stress come from within ourselves. Programming culture values intellect, which causes us to compare ourselves to others, which leads to impostor syndrome or feeling guilty, both sources of stress in their own right.
 
-Diet and exercise
+### Diet and exercise
+
 “A programmer is a mechanism for turning caffeine into code,” so goes the old saying. I’d add sugar to that list too! Stimulants like caffeine actually amplify the stress response. Again, this is fine in moderation, but not great long-term.
 
 Sitting at a desk all day isn’t exactly conducive to physical fitness. The tension that is part of the stress response can accumulate in the body, leading to huge buildups of stress over time.
@@ -137,16 +142,17 @@ So what’s a busy programmer to do? Stress exists, it’s going to get excessiv
 
 If you knew this about a system you’d developed and maintained, you’d take action, right? (RIGHT???)
 
-Want to figure out if you're on the edge of burnout? Download my handy checklist here.
 
 Thankfully, stress has been thoroughly researched. There are a number of strategies that you can consider when trying to manage stress in your life.
 
 They fall into three categories:
 
-Address the source
-Undo the damage
-Reduce your baseline
-Address the source
+- Address the source
+- Undo the damage
+- Reduce your baseline
+
+
+### Address the source
 Sometimes it’s necessary and sensible to work on removing the sources of excessive stress in your life. Think about what causes you the most stress, and work to do something about it.
 
 With low level, acute stress, it's possible to mentally reframe it. Is that actually stress you are feeling about an upcoming demo? Could you possibly interpret those sensations as excitement instead? Sometimes this little mental shift is all that it takes to feel differently about the stressful situation.
@@ -175,21 +181,21 @@ How about your diet? Your physical exercise routine?
 
 A quick audit of the internal and external sources of stress in your life will provide you with a list of actions you can take to remove them, if possible. It will really help to talk this over with a friend or colleague. It’s sometimes hard to take a clear perspective when you’re in the middle of a stressful patch.
 
-Undo the damage
+### Undo the damage
 Of course, it’s not possible to remove all of the sources of stress in life. If you’ve found a way, untold riches await, so congratulations! And please let me know your secret.
 
 You can certainly try to undo the damage though. And exercise is an extremely effective way to do this. Exercise release endorphins, which not only feel good, but also act to reduce the negative effects of released stress hormones.
 
 Exercise regimes are extremely personal;it can take a while to find one that works for you. My preferred stress buster is yoga—it combines physical demands with deep breathing, which, as we’ll soon see, is a great way to initiate relaxation. But anything that involves moderate to strong physical exercise will do.
 
-Pro-active stress management
+## Pro-active stress management
 We all have a baseline stress level that fluctuates during our lifetime. By taking a pro-active approach, it’s possible to reduce this baseline.
 
 Making stress reduction a focus of your life is a worthy goal. The less affected you are by excessive stress, the more effective you’ll be.
 
 Embrace conscious relaxation exercises, such as the one below. Or learn mindfulness skills, which numerous studies have shown reduce the effects of stress.
 
-A quick relaxation exercise
+### A quick relaxation exercise
 Here’s a quick exercise that helps most people relax.
 
 It works on the simple principle that it’s possible to activate the parasympathetic branch of your nervous system—the part responsible for the relaxation response. You start to slow and deepen your breathing.
@@ -208,7 +214,7 @@ Repeat this for a couple of minutes, generally for around ten to fifteen breaths
 
 How well did this work for you?
 
-Do you pass the stress test?
+## Do you pass the stress test?
 Everyone has different needs when it comes to learning how to manage stress in their life. How resilient you are in the face of stress is determined by a complex set of biological and environmental factors. Your relationship with stress can, and does, change over your lifetime.
 
 Many people find that learning more about their relationship with stress is very rewarding. Chronic stress is a state of misdirected energy, which causes many aspects of your life to suffer.
