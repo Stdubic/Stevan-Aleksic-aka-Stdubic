@@ -4,5 +4,5 @@ title: Music
 permalink: /music/
 ---
 
- [https://soundcloud.com/dubic](https://soundcloud.com/dubic)
+ {% include soundcloud.html " %} /[https://soundcloud.com/dubic](https://soundcloud.com/dubic)
 
