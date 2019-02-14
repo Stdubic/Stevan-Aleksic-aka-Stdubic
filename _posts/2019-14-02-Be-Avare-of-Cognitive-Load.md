@@ -1,0 +1,13 @@
+---
+layout: post
+---
+
+In cognitive psychology, cognitive load refers to the effort being used in the working memory. Cognitive load theory differentiates cognitive load into three types: intrinsic, extraneous, and germane.
+
+Intrinsic cognitive load is the effort associated with a specific topic, extraneous cognitive load refers to the way information or tasks are presented to a learner, and germane cognitive load refers to the work put into creating a permanent store of knowledge, or a schema.
+
+Cognitive load theory was developed in the late 1980s out of a study of problem solving by John Sweller.[1] Sweller argued that instructional design can be used to reduce cognitive load in learners. Much later, other researchers developed a way to measure perceived mental effort which is indicative of cognitive load.[2][3] Task-invoked pupillary response is a reliable and sensitive measurement of cognitive load that is directly related to working memory.[4] Information may only be stored in long term memory after first being attended to, and processed by, working memory. Working memory, however, is extremely limited in both capacity and duration. These limitations will, under some conditions, impede learning. Heavy cognitive load can have negative effects on task completion, and it is important to note that the experience of cognitive load is not the same in everyone. The elderly, students, and children experience different, and more often higher, amounts of cognitive load.
+
+The fundamental tenet of cognitive load theory is that the quality of instructional design will be raised if greater consideration is given to the role and limitations, of working memory.
+
+With increased distractions, particularly from cell phone use, students are more prone to experiencing high cognitive load which can reduce academic success.[5]
